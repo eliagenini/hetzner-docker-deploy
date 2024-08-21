@@ -16,7 +16,7 @@ cat <<EOF > .cloudflared/cert.json
 }
 EOF
 
-Setup Tunnel Config
+# Setup Tunnel Config
 cat <<EOF > .cloudflared/config.yml
 tunnel: ${TUNNEL_ID}
 credentials-file: /root/.cloudflared/cert.json
