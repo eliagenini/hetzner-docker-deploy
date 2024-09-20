@@ -5,7 +5,7 @@ provider "cloudflare" {
 resource "cloudflare_record" "service" {
   zone_id = var.cloudflare_zone_id
   name    = var.subdomain
-  content   = cloudflare_tunnel.service.cname
+  content   = cloudflare_zero_trust_tunnel_cloudflared.service.cname
   type    = "CNAME"
   proxied = true
   ttl     = 1
@@ -15,15 +15,15 @@ resource "random_id" "tunnel_secret" {
   byte_length = 32
 }
 
-resource "cloudflare_tunnel" "service" {
+resource "cloudflare_zero_trust_tunnel_cloudflared" "service" {
   account_id = var.cloudflare_account_id
   name       = "service"
   secret     = random_id.tunnel_secret.b64_std
 }
 
-resource "cloudflare_tunnel_config" "service" {
+resource "cloudflare_zero_trust_tunnel_cloudflared_config" "service" {
   account_id = var.cloudflare_account_id
-  tunnel_id  = cloudflare_tunnel.service.id
+  tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.service.id
 
   config {
     ingress_rule {

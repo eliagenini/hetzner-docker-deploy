@@ -40,6 +40,16 @@ write_files:
 
       volumes:
         gluetun:
+  - path: /etc/systemd/resolved.conf.d/dns_servers.conf
+    content: |
+      [Resolve]
+      DNS=109.163.232.244 109.163.232.239
+    permissions: '0644'
+
+manage_resolv_conf: true
+resolv_conf:
+  nameservers: ['109.163.232.244', '109.163.232.239']
+
 runcmd:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
   - add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"

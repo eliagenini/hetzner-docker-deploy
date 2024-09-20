@@ -15,12 +15,26 @@ variable "hcloud_image" {
 
 variable "hcloud_server_type" {
   type = string
-  default = "cx11"
+  default = "cx22"
 }
 
 variable "hcloud_location" {
   type = string
-  default = "hel1"
+  default = "fsn1"
+}
+
+# Proxmox
+variable "pve_endpoint" {
+  type = string
+}
+
+variable "pve_username" {
+  type = string
+}
+
+variable "pve_api-key" {
+  type = string
+  sensitive = true
 }
 
 # Cloudflare
